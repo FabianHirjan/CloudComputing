@@ -1,0 +1,271 @@
+{
+	"info": {
+		"_postman_id": "90cfabe7-0ba8-4174-aed6-3e079ed53258",
+		"name": "APICC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "39542905"
+	},
+	"item": [
+		{
+			"name": "localhost:8000/books",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8000/books"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/books Copy",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8000/books"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/books PUT",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"Nuvele\", \"author\": \"Mihay Eminescovici\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8000/books/2"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/books PUT Not Working",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"Nuvele\", \"author\": \"Mihay Eminescovici\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8000/books/50"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/books ID",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:8000/books/1"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/books ID Not Working",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:8000/books/50"
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"Poezii\", \"author\": \"Mihai Eminescu\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8000/books"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/books",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:8000/books"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/books/6",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": "localhost:8000/books/6"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/books Not working",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"Poezii\", \"autor\": \"Mihai Eminescu\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8000/books"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/reviews",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8000/reviews"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/reviews",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:8000/reviews"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/reviews",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"bookId\": 2, \"rating\":5, \"comment\": \"Imi place mult\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8000/reviews"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/reviews/1",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8000/reviews/1"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/reviews/1",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"bookId\": 2, \"rating\":3, \"comment\": \"Imi place mult\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8000/reviews/1"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/reviews/1",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:8000/reviews/1"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/reviews/book/2",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8000/reviews/book/2"
+			},
+			"response": []
+		}
+	]
+}
