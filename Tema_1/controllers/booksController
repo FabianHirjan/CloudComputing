@@ -1,0 +1,66 @@
+const pool = require('../db');
+
+async function getAllBooks() {
+  const result = await pool.query('SELECT * FROM books ORDER BY id');
+  return result.rows;
+}
+
+async function getBookById(id) {
+  const result = await pool.query('SELECT * FROM books WHERE id = $1', [id]);
+  return result.rows[0];
+}
+
+async function createBook(title, author) {
+  const result = await pool.query(
+    'INSERT INTO books (title, author) VALUES ($1, $2) RETURNING *',
+    [title, author]
+  );
+  return result.rows[0];
+}
+
+async function updateBook(id, title, author) {
+  const result = await pool.query(
+    'UPDATE books SET title = $1, author = $2 WHERE id = $3 RETURNING *',
+    [title, author, id]
+  );
+  return result.rows[0];
+}
+
+async function deleteBook(id) {
+  const result = await pool.query(
+    'DELETE FROM books WHERE id = $1 RETURNING *',
+    [id]
+  );
+  return result.rows[0];
+}
+
+async function deleteAllBooks() {
+  await pool.query('DELETE FROM books');
+}
+
+async function findByAuthor(author) {
+  const result = await pool.query(
+    'SELECT * FROM books WHERE author = $1 ORDER BY id',
+    [author]
+  );
+  return result.rows;
+}
+
+async function changeAuthor(oldAuthor, newAuthor) {
+  const result = await pool.query(
+    'UPDATE books SET author = $1 WHERE author = $2',
+    [newAuthor, oldAuthor]
+  );
+  return result.rowCount;
+}
+
+module.exports = {
+  getAllBooks,
+  getBookById,
+  createBook,
+  updateBook,
+  deleteBook,
+  deleteAllBooks,
+  findByAuthor,
+  changeAuthor
+};
