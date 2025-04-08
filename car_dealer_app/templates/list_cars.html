@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Car Listings</h2>
+  {% if cars %}
+    <ul>
+      {% for car in cars %}
+        <li>
+          <strong>{{ car.brand }} - {{ car.model }} ({{ car.year }})</strong>  
+          - ${{ car.price }}
+          {% if car.photo_url %}
+            <div>
+              <img src="{{ car.photo_url }}" alt="Car photo" style="max-width:200px;">
+            </div>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No cars in the database yet.</p>
+  {% endif %}
+{% endblock %}
