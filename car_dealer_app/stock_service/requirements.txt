@@ -1,5 +1,4 @@
 Flask
 gunicorn
 google-cloud-datastore
-google-cloud-storage
-requests
+flask-cors

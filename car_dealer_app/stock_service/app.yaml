@@ -1,0 +1,3 @@
+runtime: python310
+service: stock
+entrypoint: gunicorn -b :$PORT main_stock:app

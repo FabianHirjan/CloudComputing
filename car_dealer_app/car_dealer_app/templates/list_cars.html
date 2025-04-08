@@ -2,11 +2,11 @@
 {% block content %}
   <h2>Car Listings</h2>
   {% if cars %}
-    <ul>
+    <ul id="carsList">
       {% for car in cars %}
-        <li>
-          <strong>{{ car.brand }} - {{ car.model }} ({{ car.year }})</strong>  
-          - ${{ car.price }}
+        <li data-car-id="{{ car.identifier }}">
+          <strong>{{ car.brand }} - {{ car.model }} ({{ car.year }})</strong> - ${{ car.price }}<br>
+          <span class="stock-info">Loading stock...</span>
           {% if car.photo_url %}
             <div>
               <img src="{{ car.photo_url }}" alt="Car photo" style="max-width:200px;">
@@ -18,4 +18,30 @@
   {% else %}
     <p>No cars in the database yet.</p>
   {% endif %}
+
+  <script>
+    // Folosim variabila STOCK_SERVICE_URL din contextul template-ului
+    const stockServiceUrl = "{{ STOCK_SERVICE_URL or 'https://stock-dot-cc-team-456211.appspot.com' }}";
+    
+    function loadStock(carIdentifier, element) {
+  fetch(stockServiceUrl + '/stock')
+    .then(response => response.json())
+    .then(data => {
+      let stockEntry = data.find(item => item.item === carIdentifier);
+      element.textContent = stockEntry ? `Stock: ${stockEntry.quantity}` : "Stock: n/a";
+    })
+    .catch(error => element.textContent = "Stock: error");
+}
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll("#carsList li").forEach(li => {
+        let carId = li.getAttribute("data-car-id");
+        let stockDiv = li.querySelector(".stock-info");
+        if (stockDiv) {
+          loadStock(carId, stockDiv);
+        }
+      });
+    });
+  </script>
 {% endblock %}
