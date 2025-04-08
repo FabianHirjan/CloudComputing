@@ -3,10 +3,8 @@ import requests
 import datetime
 from flask import Flask, render_template, request, redirect, url_for, abort
 from google.cloud import datastore, storage
-from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app) 
 
 # Inițializează clienții pentru Cloud Datastore și Cloud Storage
 datastore_client = datastore.Client()
