@@ -1,0 +1,3 @@
+runtime: python310
+service: sale
+entrypoint: gunicorn -b :$PORT main_sale:app

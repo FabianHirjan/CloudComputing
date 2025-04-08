@@ -1,0 +1,3 @@
+runtime: python310
+service: appointment
+entrypoint: gunicorn -b :$PORT main_appointment:app

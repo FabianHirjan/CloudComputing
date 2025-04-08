@@ -18,29 +18,26 @@
   {% else %}
     <p>No cars in the database yet.</p>
   {% endif %}
-
+  
   <script>
-    // Folosim variabila STOCK_SERVICE_URL din contextul template-ului
     const stockServiceUrl = "{{ STOCK_SERVICE_URL or 'https://stock-dot-cc-team-456211.appspot.com' }}";
-    
-    function loadStock(carIdentifier, element) {
-  fetch(stockServiceUrl + '/stock')
-    .then(response => response.json())
-    .then(data => {
-      let stockEntry = data.find(item => item.item === carIdentifier);
-      element.textContent = stockEntry ? `Stock: ${stockEntry.quantity}` : "Stock: n/a";
-    })
-    .catch(error => element.textContent = "Stock: error");
-}
-
-
+    function loadStock(carId, elem) {
+      fetch(stockServiceUrl + '/stock')
+        .then(response => response.json())
+        .then(data => {
+          let entry = data.find(item => item.item === carId);
+          elem.textContent = entry ? `Stock: ${entry.quantity}` : "Stock: n/a";
+        })
+        .catch(error => {
+          console.error('Error loading stock:', error);
+          elem.textContent = "Stock: error";
+        });
+    }
     document.addEventListener("DOMContentLoaded", function() {
       document.querySelectorAll("#carsList li").forEach(li => {
         let carId = li.getAttribute("data-car-id");
-        let stockDiv = li.querySelector(".stock-info");
-        if (stockDiv) {
-          loadStock(carId, stockDiv);
-        }
+        let stockElem = li.querySelector(".stock-info");
+        if(stockElem) loadStock(carId, stockElem);
       });
     });
   </script>

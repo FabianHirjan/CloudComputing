@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Add a New Sale</h2>
+  <form method="POST" action="{{ url_for('add_sale') }}">
+    <label for="customer_name">Customer Name:</label><br>
+    <input type="text" name="customer_name" id="customer_name" required><br><br>
+    
+    <label for="car_id">Car ID:</label><br>
+    <input type="number" name="car_id" id="car_id" required><br><br>
+    
+    <label for="order_status">Order Status:</label><br>
+    <input type="text" name="order_status" id="order_status" required><br><br>
+    
+    <label for="price">Price:</label><br>
+    <input type="number" name="price" id="price" step="0.01" required><br><br>
+    
+    <input type="submit" value="Add Sale">
+  </form>
+{% endblock %}

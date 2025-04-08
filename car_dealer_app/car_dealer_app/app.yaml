@@ -1,6 +1,6 @@
 runtime: python310
 entrypoint: gunicorn -b :$PORT main:app
-
 env_variables:
-  # URL-ul serviciului de stoc; acesta se va folosi în backend pentru a face apeluri.
+  SALE_SERVICE_URL: "https://sale-dot-cc-team-456211.appspot.com"
+  APPOINTMENT_SERVICE_URL: "https://appointment-dot-cc-team-456211.appspot.com"
   STOCK_SERVICE_URL: "https://stock-dot-cc-team-456211.appspot.com"

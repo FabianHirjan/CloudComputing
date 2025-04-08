@@ -1,25 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
   <h2>Add a New Car</h2>
-  <form method="POST" action="{{ url_for('add_car_route') }}" enctype="multipart/form-data">
+  <form method="POST" action="{{ url_for('add_car') }}" enctype="multipart/form-data">
     <label for="brand">Brand:</label><br>
     <input type="text" name="brand" id="brand" required><br><br>
-
+    
     <label for="model">Model:</label><br>
     <input type="text" name="model" id="model" required><br><br>
-
+    
     <label for="year">Year:</label><br>
     <input type="number" name="year" id="year" required><br><br>
-
+    
     <label for="price">Price:</label><br>
     <input type="number" name="price" id="price" step="0.01" required><br><br>
-
+    
     <label for="stock">Stock:</label><br>
     <input type="number" name="stock" id="stock" required><br><br>
-
+    
     <label for="photo">Photo (optional):</label><br>
     <input type="file" name="photo" id="photo"><br><br>
-
+    
     <input type="submit" value="Add Car">
   </form>
 {% endblock %}
