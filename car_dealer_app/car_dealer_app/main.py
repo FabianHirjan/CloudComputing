@@ -158,5 +158,36 @@ def add_appointment():
         return redirect(url_for('list_appointments'))
     return render_template('add_appointment.html')
 
+@app.route("/api/locatii", methods=["GET"])
+def get_locatii():
+    # Retrieve query parameters for brand, lat, lng.
+    brand = request.args.get("brand")
+    lat = request.args.get("lat")
+    lng = request.args.get("lng")
+
+    if not all([brand, lat, lng]):
+        return jsonify({"error": "Missing required query parameters: brand, lat, lng"}), 400
+
+    google_api_key = os.getenv("GOOGLE_API_KEY")
+    if not google_api_key:
+        return jsonify({"error": "GOOGLE_API_KEY environment variable not set"}), 500
+
+    url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
+    params = {
+        "location": f"{lat},{lng}",
+        "radius": "100000",  # Adjust the search radius as needed.
+        "type": "car_dealer", 
+        "name": brand,
+        "keyword": brand,
+        "key": google_api_key
+    }
+
+    try:
+        resp = requests.get(url, params=params)
+        return jsonify(resp.json()), resp.status_code
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)

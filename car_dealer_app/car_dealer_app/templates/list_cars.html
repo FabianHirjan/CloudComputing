@@ -12,21 +12,25 @@
               <img src="{{ car.photo_url }}" alt="Car photo" style="max-width:200px;">
             </div>
           {% endif %}
+          <div class="btn-group mt-2" role="group" aria-label="Car Actions">
+            <a href="maps.html?brand={{ car.brand|urlencode }}" class="btn btn-primary btn-sm">Maps</a>
+            <a href="youtube.html?brand={{ car.brand|urlencode }}&model={{ car.model|urlencode }}" class="btn btn-secondary btn-sm">YouTube</a>
+          </div>
         </li>
       {% endfor %}
     </ul>
   {% else %}
     <p>No cars in the database yet.</p>
   {% endif %}
-  
+
   <script>
-    const stockServiceUrl = "{{ STOCK_SERVICE_URL or 'https://stock-dot-cc-team-456211.appspot.com' }}";
+    const stockServiceUrl = "{{ STOCK_SERVICE_URL or 'https://stock-dot-cc-team-456211.appspot.com/' }}";
     function loadStock(carId, elem) {
       fetch(stockServiceUrl + '/stock')
         .then(response => response.json())
         .then(data => {
           let entry = data.find(item => item.item === carId);
-          elem.textContent = entry ? `Stock: ${entry.quantity}` : "Stock: n/a";
+          elem.textContent = entry ? Stock: ${entry.quantity} : "Stock: n/a";
         })
         .catch(error => {
           console.error('Error loading stock:', error);

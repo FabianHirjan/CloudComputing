@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Car Presentation Video</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        #videoContainer {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        iframe {
+            width: 80%;
+            height: 450px;
+            border: none;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+<header>Car Presentation Video</header>
+<p id="videoStatus">Loading video...</p>
+<div id="videoContainer"></div>
+<p><a href="list_cars.html">Back to Home</a></p>
+
+<script>
+    function getQueryParams() {
+        const params = {};
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.forEach((value, key) => {
+            params[key] = value;
+        });
+        return params;
+    }
+
+    function loadVideo() {
+        const params = getQueryParams();
+        const brand = params.brand || "toyota";   
+        const model = params.model || "corolla";    
+
+        const searchQuery = encodeURIComponent(`${brand} ${model} presentation`);
+
+        const apiKey = "AIzaSyBlULneTTx3eEFPXQ3ZRUI-SdAbumoX_TU";
+
+        const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&q=${searchQuery}&key=${apiKey}`;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const videoStatusEl = document.getElementById("videoStatus");
+                if (data.items && data.items.length > 0) {
+                    const videoId = data.items[0].id.videoId;
+                    const embedUrl = "https://www.youtube.com/embed/" + videoId;
+                    const iframe = document.createElement("iframe");
+                    iframe.src = embedUrl;
+                    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                    iframe.allowFullscreen = true;
+                    document.getElementById("videoContainer").appendChild(iframe);
+                    videoStatusEl.textContent = "";
+                } else {
+                    videoStatusEl.textContent = "No video found for this car.";
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching video:", error);
+                document.getElementById("videoStatus").textContent = "Error loading video.";
+            });
+    }
+
+    document.addEventListener("DOMContentLoaded", loadVideo);
+</script>
+</body>
+</html>

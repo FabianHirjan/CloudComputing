@@ -4,7 +4,6 @@ from google.cloud import datastore
 from flask_cors import CORS
 
 app = Flask(__name__)
-# Configure CORS to allow requests from your specific origin
 CORS(app, resources={r"/*": {"origins": ["https://cc-team-456211.ey.r.appspot.com"], 
                             "methods": ["GET", "POST", "OPTIONS"],
                             "allow_headers": ["Content-Type", "Authorization"]}})
